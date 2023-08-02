@@ -1,0 +1,25 @@
+{
+  "name": "cypress-again",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "first": "npx cypress run --spec cypress/e2e/0-myFolder/1-test.cy.js --env allure=true",
+    "api": "npx cypress run --spec cypress/e2e/0-myFolder/api.cy.js --env allure=true",
+    "load": "npx cypress run --spec cypress/e2e/0-myFolder/downloads.cy.js --env allure=true",
+    "clean": "./node_modules/rimraf/bin.js /.allure-report",
+    "allure": "allure generate allure-results --clean && allure open"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@shelex/cypress-allure-plugin": "^2.37.0",
+    "allure-commandline": "^2.21.0",
+    "cy-verify-downloads": "^0.1.13",
+    "cypress": "^12.10.0",
+    "cypress-downloadfile": "^1.2.3",
+    "mocha-allure-reporter": "^1.4.0"
+  }
+}
