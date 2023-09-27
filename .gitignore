@@ -1,6 +1,6 @@
 /node_modules
 /allure-report
 /allure-results
-/doownload/*
+/download/*
 *.log
 .DS_Store

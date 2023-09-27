@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import { host } from "../testData/endpoints";
+import { endpoints } from "../testData/endpoints";
 import { randoms } from "../utils/random";
 
 describe(`Go Rest API`, () => {
@@ -52,7 +54,6 @@ describe(`Go Rest API`, () => {
                 expect(response.body).to.have.property('name', newUser.name)
                 expect(response.body).to.have.property('email', newUser.email)
                 userId = response.body.id
-                console.log(userId)
                 return userId
             })
         cy.log()
@@ -73,9 +74,29 @@ describe(`Go Rest API`, () => {
         cy.get('@getUser')
             .then((response) => {
                 expect(response.status).to.eq(200)
-                console.log(response.body)
                 return response.body
             })
-    })
+    }); 
+
+    it(`should delete created user `, () => {
+        cy.request({
+            method: 'DELETE', 
+            url:  `https://gorest.co.in/public/v2/users/${userId}`, 
+            headers: {
+                'Content-Type': 'application/json', 
+                Accept: 'application/json',
+                Authorization: `Bearer ${access_token}`
+            }, 
+
+        }).as('deleteUser')
+        
+        cy.get('@deleteUser')
+            .then((response) => {
+                expect(response.status).to.eq(204)
+                cy.log(response.body)
+                return response.body
+            })
+    }); 
+
 
 })
